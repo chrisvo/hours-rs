@@ -575,7 +575,7 @@ impl HoursApp {
                 Frame::new()
                     .fill(p.page)
                     .inner_margin(Margin::symmetric(14, 11))
-                    .stroke(Stroke::new(0.5, p.line)),
+                    .stroke(Stroke::new(0.5_f32, p.line)),
             )
             .show(ctx, |ui| {
                 ui.horizontal(|ui| {
@@ -652,7 +652,7 @@ impl HoursApp {
                 Frame::new()
                     .fill(p.page)
                     .inner_margin(Margin::symmetric(20, 8))
-                    .stroke(Stroke::new(0.5, p.line)),
+                    .stroke(Stroke::new(0.5_f32, p.line)),
             )
             .show(ctx, |ui| {
                 ui.horizontal(|ui| {
@@ -715,7 +715,7 @@ impl HoursApp {
                 Frame::new()
                     .fill(p.sidebar)
                     .inner_margin(Margin::symmetric(18, 24))
-                    .stroke(Stroke::new(0.5, p.line)),
+                    .stroke(Stroke::new(0.5_f32, p.line)),
             )
             .show(ctx, |ui| {
                 egui::TopBottomPanel::bottom("sidebar_footer")
@@ -761,8 +761,11 @@ impl HoursApp {
                     .show(ui, |ui| {
                         ui.horizontal(|ui| {
                             let (r, _) = ui.allocate_exact_size(Vec2::splat(34.0), Sense::hover());
-                            ui.painter()
-                                .circle_stroke(r.center(), 16.0, Stroke::new(0.8, p.faint));
+                            ui.painter().circle_stroke(
+                                r.center(),
+                                16.0,
+                                Stroke::new(0.8_f32, p.faint),
+                            );
                             icons::draw(ui.painter(), r.shrink(7.0), Icon::Cross, p.accent);
                             ui.add_space(5.0);
                             ui.label(
@@ -933,7 +936,7 @@ impl HoursApp {
             return;
         }
         let p = self.preferences.theme.palette();
-        egui::SidePanel::right("tools").exact_width(285.0).resizable(false).frame(Frame::new().fill(p.sidebar).inner_margin(Margin::same(18)).stroke(Stroke::new(0.5,p.line))).show(ctx,|ui| {
+        egui::SidePanel::right("tools").exact_width(285.0).resizable(false).frame(Frame::new().fill(p.sidebar).inner_margin(Margin::same(18)).stroke(Stroke::new(0.5_f32,p.line))).show(ctx,|ui| {
             ui.horizontal(|ui| {
                 ui.label(RichText::new(if self.panel==Panel::Search { "Find in prayer" } else { "Your journal" }).font(theme::heading(16.0)));
                 ui.with_layout(Layout::right_to_left(Align::Center),|ui| { if icons::button(ui,Icon::Close,"Close panel",p.muted).clicked() { self.panel=Panel::None; } });
@@ -1023,7 +1026,7 @@ impl HoursApp {
                     ui.label(RichText::new(office.hour.subtitle()).size(10.5).color(p.faint));
                     ui.add_space(27.0);
                     let (line,_)=ui.allocate_exact_size(egui::vec2(width,1.0),Sense::hover());
-                    ui.painter().line_segment([line.left_center(),line.right_center()],Stroke::new(0.7,p.line));
+                    ui.painter().line_segment([line.left_center(),line.right_center()],Stroke::new(0.7_f32,p.line));
                     ui.add_space(13.0);
                     for (section_index,section) in office.sections.iter().enumerate() {
                         ui.add_space(24.0);

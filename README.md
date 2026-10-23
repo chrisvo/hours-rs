@@ -1,96 +1,92 @@
-<img src="assets/icon.svg" width="64" height="64" alt="Hours icon">
+<p align="center">
+  <img src="assets/icon.svg" width="88" height="88" alt="Hours">
+</p>
 
-# Hours
+<h1 align="center">Hours</h1>
 
-A native Rust desktop reader for the modern Roman Catholic Liturgy of the Hours in English.
+<p align="center">The Liturgy of the Hours, on your desktop.</p>
 
-Cinzel headings recall Roman inscriptions. Literata sets the prayer text. Both fonts are bundled. Light, parchment, and dark themes work without a network connection.
+<p align="center">
+  <a href="https://github.com/chrisvo/hours-rs/actions/workflows/check.yml"><img src="https://github.com/chrisvo/hours-rs/actions/workflows/check.yml/badge.svg?branch=main" alt="Build and tests"></a>
+  <a href="https://github.com/chrisvo/hours-rs/releases/latest"><img src="https://img.shields.io/github/v/release/chrisvo/hours-rs?color=98724a" alt="Latest release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-98724a" alt="MIT license"></a>
+  <img src="https://img.shields.io/badge/macOS-Apple%20Silicon-555555" alt="macOS on Apple Silicon">
+</p>
 
-## Run the app
+<p align="center">
+  <a href="https://github.com/chrisvo/hours-rs/releases/latest">Download for Mac</a> ·
+  <a href="docs/getting-started.md">Getting started</a> ·
+  <a href="CONTRIBUTING.md">Contribute</a> ·
+  <a href="https://github.com/chrisvo/hours-rs/issues/new/choose">Report an issue</a>
+</p>
 
-Requires Rust 1.88 or later. macOS is the verified desktop target.
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/reader-dark.png">
+    <img src="docs/images/reader-parchment.png" alt="Hours, a native prayer reader with a daily office sidebar, Cinzel headings, and spacious serif text" width="1100">
+  </picture>
+</p>
 
-```sh
-cargo run --release
-```
+<p align="center"><sub>The actual native app with public-domain preview text. <a href="docs/preview/README.md">About these screenshots</a></sub></p>
 
-Choose an hour, then select **Download this hour**. To prepare several days, open **Offline library**, choose a date range, and select **Download all hours**. Each completed office stays on your device. Interrupted downloads retain complete offices; retry skips them.
+Hours is a native Rust reader for the modern Roman Catholic Liturgy of the Hours in English. Download the dates you need, then pray, search, and keep notes without a connection. No account is required.
 
-The app includes the Office of Readings, Morning Prayer, Daytime Prayer, Evening Prayer, and Night Prayer. The Daytime Prayer document contains the midmorning, midday, and midafternoon options supplied by iBreviary. Follow its rubrics to choose the appropriate texts.
+## A place for daily prayer
 
-## Pray offline
+- **The daily office.** Office of Readings, Morning Prayer, Daytime Prayer, Evening Prayer, and Night Prayer, with date navigation and a section list.
+- **Your local library.** Explicit downloads, visible date coverage, and an offline mode. Reading and navigation never start network requests.
+- **Your place and reflections.** Saved reading positions, notes, bookmarks, highlights, and prayer progress stay on your device.
+- **A readable page.** Light, parchment, and dark themes, adjustable text size and spacing, focus mode, and keyboard controls.
+- **A portable library.** Export a backup or import one on another device. Imports preserve existing texts and personal notes.
 
-Download the dates you need before disconnecting. Turn on **Offline mode** in the library to disable downloads. Reading, search, notes, bookmarks, highlights, reading position, and prayer progress use local storage. The app makes no network requests during startup or navigation.
+## Get Hours
 
-Offline coverage is limited to downloaded dates. A missing office is shown as not downloaded. Hours does not calculate future liturgical calendars or substitute prayers from another date. iBreviary controls the available dates and its calendar's observances.
+Download **Hours for macOS on Apple Silicon** from the [latest release](https://github.com/chrisvo/hours-rs/releases/latest). Unzip it and move **Hours.app** to Applications.
 
-## Keep notes and bookmarks
+This is an early release. The Mac app is ad-hoc signed and has not been notarized by Apple. See the [installation guide](docs/getting-started.md#install-on-macos) for details. Intel Macs, Windows, and Linux do not have verified release builds yet.
 
-Right-click a passage to bookmark it, highlight it, copy it, or write a note. Double-click a passage to open its note. Select **Save note** to persist your reflection. Closing the note also saves it. The journal lists saved passages across dates.
-
-The app stores data in a local SQLite file. On macOS the directory is `~/Library/Application Support/com.chrisvo.hours-rs/`. Set `HOURS_RS_HOME` to use another directory.
-
-Open **Offline library → Back up or move your library** to export a JSON backup. The backup includes downloaded offices, notes, bookmarks, highlights, and prayer marks. Import it on another device or drop it onto the app. Imports add missing records without replacing existing documents or personal notes.
-
-## Keyboard controls
-
-| Key | Action |
-| --- | --- |
-| ⌘1 through ⌘5 | Choose an hour |
-| Left / Right | Previous / next hour |
-| ⌘K | Choose a date |
-| ⌘F | Search the current hour |
-| ⌘J | Open notes and bookmarks |
-| ⌘B | Toggle the hours sidebar |
-| ⌘Enter | Mark the current hour as prayed |
-| ⌘+ / ⌘− / ⌘0 | Increase, decrease, or reset text size |
-| ⌘, | Open reading appearance |
-| Escape | Close panels and leave focus mode |
-
-On Windows and Linux, use Ctrl in place of ⌘. Those platforms have not yet been verified.
-
-## Use the command line
+Prefer to build it yourself? Install [Rust](https://www.rust-lang.org/tools/install), then run:
 
 ```sh
-cargo run -- download 2026-10-22 7
-cargo run -- list
-cargo run -- read 2026-10-22 morning
-cargo run -- --offline --date 2026-10-22 --hour morning
-cargo run -- export ~/Desktop/prayers.hours.json
-cargo run -- import ~/Desktop/prayers.hours.json
+git clone https://github.com/chrisvo/hours-rs.git
+cd hours-rs
+cargo run --release --locked
 ```
 
-`download` accepts 1 to 30 days. The other commands use local data only. The source can refuse dates outside its available range.
+Rust 1.88 or later is required. [Contributor setup](CONTRIBUTING.md) includes checks and Mac packaging.
 
-## Build a Mac application
+## Prepare for offline use
 
-```sh
-scripts/bundle-macos.sh
-open dist/Hours.app
-```
+1. Choose a date and open **Offline library**.
+2. Choose how many days to download and select **Download all hours**.
+3. Wait for the dates you need to show **5/5 hours**.
+4. Enable **Offline mode** and read from your local library.
 
-The script creates an ad-hoc signed local app with embedded fonts and a `dist/Hours-macOS.zip` archive. It does not notarize a public release. Use `--debug` for a development bundle.
+**Offline coverage is limited to downloaded dates.** Hours does not contain a perpetual calendar or a bundled prayer corpus. A missing office stays visibly missing. iBreviary determines which dates and observances are available.
 
-## Verify changes
+The Daytime Prayer document includes the midmorning, midday, and midafternoon options supplied by the source. Follow its rubrics to choose the appropriate text.
 
-```sh
-cargo fmt --check
-cargo clippy --locked --all-targets -- -D warnings
-cargo test --locked
-```
+## Privacy
 
-Unit tests use synthetic prayers, including parser and persistence tests. Live-source checks are separate from the deterministic suite.
+Hours has no accounts, analytics, or cloud sync. Downloads connect to iBreviary only when you request them. Fonts and app assets are bundled.
 
-Capture the actual native window for a selected local office:
+On macOS, your library is stored in `~/Library/Application Support/com.chrisvo.hours-rs/`. See [storage and backups](docs/getting-started.md#back-up-your-library).
 
-```sh
-cargo run -- --offline --date 2026-10-22 --hour evening --screenshot /tmp/hours.png
-```
+## Documentation
 
-The [offline-library design](docs/design/offline-library.md) describes ownership and download verification. The [decision log](docs/decisions.tsv) records the implementation choices.
+- [Get started, pray offline, and back up your library](docs/getting-started.md)
+- [Keyboard controls and command-line reference](docs/reference.md)
+- [How the offline library works](docs/design/offline-library.md)
+- [Contribute to Hours](CONTRIBUTING.md)
+- [Release notes](CHANGELOG.md)
+- [Report a security issue](SECURITY.md)
 
-On macOS, verify a downloaded date against the built app with `scripts/verify-offline.sh YYYY-MM-DD`. It blocks network access, compares all five offices after a backup restore into a temporary library, and captures the native window. The temporary directory contains personal prayer texts and stays on your machine.
+## Contribute
 
-## Credits
+Bug reports, accessibility improvements, documentation, and platform testing are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md), or open a [bug report or feature request](https://github.com/chrisvo/hours-rs/issues/new/choose). Use synthetic fixtures for tests and respect prayer-text licenses.
 
-Cinzel, Literata, and Inter are distributed under the SIL Open Font License. Their license files are in [assets/fonts](assets/fonts). Prayer texts retain their publishers' copyrights. Application code is MIT licensed.
+## License and credits
+
+Application code is available under the [MIT license](LICENSE). Cinzel, Literata, and Inter use the [SIL Open Font License](assets/fonts). Release bundles include third-party notices.
+
+Thanks to the maintainers of egui, SQLite, reqwest, and the other libraries that make Hours possible.
