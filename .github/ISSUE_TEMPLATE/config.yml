@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Get started with Hours
+    url: https://github.com/chrisvo/hours-rs/blob/main/docs/getting-started.md
+    about: Installation, offline downloads, and backups.
+  - name: Report a security vulnerability
+    url: https://github.com/chrisvo/hours-rs/security/advisories/new
+    about: Report vulnerabilities privately instead of opening a public issue.

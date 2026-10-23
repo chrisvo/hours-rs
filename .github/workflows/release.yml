@@ -1,0 +1,36 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  check:
+    uses: ./.github/workflows/check.yml
+  release:
+    needs: check
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Hours-macOS-arm64
+          path: dist
+      - name: Verify assets and create draft release
+        working-directory: dist
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          asset="Hours-${RELEASE_TAG}-macOS-arm64.zip"
+          test -f "$asset"
+          test -f "$asset.sha256"
+          sha256sum -c "$asset.sha256"
+          gh release create "$RELEASE_TAG" "$asset" "$asset.sha256" \
+            --verify-tag --draft --generate-notes --title "Hours $RELEASE_TAG"
