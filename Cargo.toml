@@ -12,11 +12,11 @@ anyhow = "1"
 chrono = { version = "0.4", features = ["serde"] }
 directories = "6"
 eframe = { version = "0.33.3", default-features = false, features = ["default_fonts", "wgpu", "accesskit", "wayland", "x11"] }
-wgpu = { version = "27", default-features = false, features = ["metal", "vulkan", "gles", "wgsl"] }
+wgpu = { version = "30", default-features = false, features = ["metal", "vulkan", "gles", "wgsl"] }
 reqwest = { version = "0.12", default-features = false, features = ["blocking", "rustls-tls", "cookies"] }
-scraper = "0.24"
-ego-tree = "0.10"
-rusqlite = { version = "0.38", features = ["bundled"] }
+scraper = "0.27"
+ego-tree = "0.11"
+rusqlite = { version = "0.40", features = ["bundled"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 image = { version = "0.25", default-features = false, features = ["png"] }
