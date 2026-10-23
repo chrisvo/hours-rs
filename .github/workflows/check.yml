@@ -1,21 +1,32 @@
 name: Check
 on:
   push:
+    branches: ['**']
   pull_request:
+  workflow_call:
+permissions:
+  contents: read
+env:
+  MACOSX_DEPLOYMENT_TARGET: '12.0'
 jobs:
   rust:
-    runs-on: macos-latest
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: dtolnay/rust-toolchain@stable
         with:
-          components: rustfmt, clippy
+          components: rustfmt, clippy, rust-docs
       - uses: Swatinem/rust-cache@v2
       - run: cargo fmt --check
       - run: cargo clippy --locked --all-targets -- -D warnings
       - run: cargo test --locked
+      - name: Install license notice generator
+        run: cargo install --locked --version 0.9.2 --features cli cargo-about
       - run: scripts/bundle-macos.sh
       - uses: actions/upload-artifact@v4
         with:
-          name: Hours-macOS
-          path: dist/Hours-macOS.zip
+          name: Hours-macOS-arm64
+          path: dist/Hours-v*-macOS-arm64.zip*
+          if-no-files-found: error

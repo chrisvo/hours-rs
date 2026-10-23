@@ -44,7 +44,7 @@ pub fn draw(p: &Painter, rect: Rect, icon: Icon, color: Color32) {
             rect.top() + y * rect.height(),
         )
     };
-    let stroke = Stroke::new(1.35, color);
+    let stroke = Stroke::new(1.35_f32, color);
     let line = |a: (f32, f32), b: (f32, f32)| {
         p.line_segment([at(a.0, a.1), at(b.0, b.1)], stroke);
     };

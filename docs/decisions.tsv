@@ -1,7 +1,7 @@
 ts	phase	decision	why	evidence	result
 2026-10-23T06:26:00Z	research	Use native Rust egui like Rasmic's bible-rs	User requested a similar desktop app	https://github.com/michaelshimeles/bible-rs	confirmed
-2026-10-23T06:30:00Z	requirements	Use the modern English Roman office	User asked for advice and we recommended the commonly used modern office	/tmp/hours-design/brief.md	selected
-2026-10-23T06:35:00Z	requirements	Make prayer documents local with explicit downloads	User required offline use; reading must not depend on a request completing	/tmp/hours-design/brief.md	open
+2026-10-23T06:30:00Z	requirements	Use the modern English Roman office	User asked for advice and we recommended the commonly used modern office	docs/design/offline-library.md	selected
+2026-10-23T06:35:00Z	requirements	Make prayer documents local with explicit downloads	User required offline use; reading must not depend on a request completing	docs/design/offline-library.md	open
 2026-10-23T06:38:00Z	typography	Bundle Cinzel headings and Literata prayer text	User replaced T3 font request with Trajan-style Catholic typography	https://github.com/google/fonts/tree/main/ofl/cinzel	selected
 2026-10-23T07:05:04Z	delivery	Complete the finite-date local library	Downloaded dates remain readable without a connection; supersedes the open requirements row	src/store.rs; src/app.rs; docs/design/offline-library.md	implemented
 2026-10-23T07:05:04Z	verification	Verify saved offices through the packaged Mac app	A library implementation alone does not prove desktop offline use	scripts/verify-offline.sh 2026-10-23; 35 restored offices and five byte comparisons with OS networking denied	passed
